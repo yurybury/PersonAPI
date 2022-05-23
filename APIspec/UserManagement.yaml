@@ -1,0 +1,392 @@
+openapi: 3.0.0
+servers: []
+info:
+  description: This is the specification of the User Management service
+  version: "0.5.0"
+  title: User Management
+  contact:
+    email: y.buryburymski@gmail.com
+  license:
+    name: MIT License
+    url: 'https://github.com/yurybury/UserManagement/blob/main/LICENSE'
+tags:
+  - name: user
+    description: User business objects and operations
+paths:
+  /user:
+    post:
+      tags:
+        - user
+      summary: Adds the user to the user management system
+      operationId: addUser
+      description: Adds the user to the user management system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User_Add'
+        description: User to add
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User_Get'
+        '400':
+          description: 'invalid input, object invalid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: an User already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: getUsers
+      summary: Gets all users
+      description: This operation gets all users
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User_Get'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/user/{id}':
+    get:
+      operationId: getUser
+      summary: Gets the user with the specified ID
+      description: This operation gets the user entity with the specified ID.
+      tags:
+        - user
+      parameters:
+        - name: id
+          description: Identifier of the user
+          required: true
+          schema:
+            type: string
+          in: path
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User_Get'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateUser
+      summary: Updates the user with the specified ID
+      description: This operation updates the user entity with the specified ID and provided updated user data
+      tags:
+        - user
+      parameters:
+        - name: id
+          description: Identifier of the user
+          required: true
+          schema:
+            type: string
+          in: path
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User_Update'
+        description: Updated user data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User_Get'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteUser
+      summary: Deletes the user
+      description: This operation deletes the user entity.
+      tags:
+        - user
+      parameters:
+        - name: id
+          description: Identifier of the user
+          required: true
+          schema:
+            type: string
+          in: path
+      responses:
+        '204':
+          description: Deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: Method Not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User_Get:
+      type: object
+      required:
+        - givenName
+        - familyName
+        - eMailAddress
+      allOf:
+      - $ref: '#/components/schemas/User_Inv'
+      - $ref: '#/components/schemas/User'
+    User_Inv:
+      type: object
+      required:
+        - id
+        - status
+      properties:
+        id:
+          description: The ID of a user in the user management system
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        status:
+          type: string
+          description: The current status of User on this position
+          example: Active
+    User_Add:
+      type: object
+      required:
+        - givenName
+        - familyName
+        - eMailAddress
+      allOf:
+      - $ref: '#/components/schemas/User'
+    User_Update:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        namePrefix:
+          type: string
+        givenName:
+          type: string
+        middleName:
+          type: string
+        familyName:
+          type: string
+        eMailAddress:
+          type: string
+          example: emp@comp.com
+        workPhone:
+          type: string
+          example: +43-664-663-0002
+        privatePhone:
+          type: string
+          example: +43-664-663-0002
+        webHomePage:
+          type: string
+          format: url
+          example: 'https://abc'
+    Error:
+      description: 'Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)'
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: 'Application relevant detail, defined in the API or a common list.'
+        message:
+          type: string
+          description: More details and corrective actions related to the error which can be shown to a client user.
