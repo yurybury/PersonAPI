@@ -330,22 +330,36 @@ components:
       type: object
       required:
         - id
+        - href
         - status
+        - creationDate
+        - lastUpdate
       properties:
         id:
-          description: The ID of a user in the user management system
+          description: unique identifier
           type: string
-          format: uuid
-          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        href:
+          type: string
+          format: uri
+          description: Hyperlink reference
         status:
           type: string
           description: The current status of User on this position
           example: Active
+        creationDate:
+          type: string
+          format: date-time
+          description: Date and time of the Digital Identity creation (timestamp)
+        lastUpdate:
+          type: string
+          format: date-time
+          description: Date and time of the Digital Identity last update (timestamp)
     User_Add:
       type: object
       required:
         - givenName
         - familyName
+        - nickname
         - eMailAddress
       allOf:
       - $ref: '#/components/schemas/User'
@@ -357,23 +371,34 @@ components:
       type: object
       properties:
         namePrefix:
+          description: Name prefix, f.e. Mrs., Mr., etc.
           type: string
         givenName:
+          description: Given name or the first name
           type: string
         middleName:
+          description: Middle name
           type: string
         familyName:
+          description: Family name or surname, the second name
+          type: string
+        nickname:
+          description: Nickname associated to this user
           type: string
         eMailAddress:
+          description: e-mail address
           type: string
           example: emp@comp.com
         workPhone:
+          description: Work phone number
           type: string
           example: +43-664-663-0002
         privatePhone:
+          description: Private phone number
           type: string
           example: +43-664-663-0002
         webHomePage:
+          description: Private web site
           type: string
           format: url
           example: 'https://abc'
