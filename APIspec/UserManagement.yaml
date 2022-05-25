@@ -349,11 +349,19 @@ components:
         creationDate:
           type: string
           format: date-time
-          description: Date and time of the Digital Identity creation (timestamp)
+          description: Date and time of the user creation (timestamp)
         lastUpdate:
           type: string
           format: date-time
-          description: Date and time of the Digital Identity last update (timestamp)
+          description: Date and time of the user last update (timestamp)
+        fromDate:
+          type: string
+          format: date-time
+          description: Effective from date and time of the user history record (timestamp)
+        toDate:
+          type: string
+          format: date-time
+          description: Effective to date and time of the user history record (timestamp)
     User_Add:
       type: object
       required:
