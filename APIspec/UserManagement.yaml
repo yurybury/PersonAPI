@@ -2,7 +2,7 @@ openapi: 3.0.0
 servers: []
 info:
   description: This is the specification of the User Management service
-  version: "0.5.1"
+  version: "1.0.0"
   title: User Management
   contact:
     email: y.buryburymski@gmail.com
