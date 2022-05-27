@@ -24,7 +24,7 @@ import (
 	"github.com/yurybury/UserManagement/rest/go/handlers"
 )
 
-var bindAddress = env.String("BIND_ADDRESS", false, ":9090", "Bind address for the server")
+var bindAddress = "localhost:9090"
 
 func main() {
 
@@ -57,7 +57,7 @@ func main() {
 
 	// create a new server
 	s := http.Server{
-		Addr:         *bindAddress,      // configure the bind address
+		Addr:         bindAddress,       // configure the bind address
 		Handler:      sm,                // set the default handler
 		ErrorLog:     l,                 // set the logger for the server
 		ReadTimeout:  5 * time.Second,   // max time to read request from the client
@@ -67,7 +67,7 @@ func main() {
 
 	// start the server
 	go func() {
-		l.Println("Starting server on port 9090")
+		l.Println("Starting server on address: " + bindAddress)
 
 		err := s.ListenAndServe()
 		if err != nil {
