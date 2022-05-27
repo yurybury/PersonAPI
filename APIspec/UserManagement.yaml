@@ -2,7 +2,7 @@ openapi: 3.0.0
 servers: 
   - url: http://localhost:9090
 info:
-  description: This is the specification of the User Management service
+  description: This is the Swagger specification of the User Management service
   version: "1.0.0"
   title: User Management
   contact:
