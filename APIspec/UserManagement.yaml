@@ -3,7 +3,7 @@ servers:
   - url: http://localhost:9090
 info:
   description: This is the Swagger specification of the User Management service
-  version: "1.0.0"
+  version: "1.1.0"
   title: User Management
   contact:
     email: y.buryburymski@gmail.com
@@ -394,6 +394,9 @@ components:
         nickname:
           description: Nickname associated to this user
           type: string
+        gender:
+          type: string
+          description: Gender
         eMailAddress:
           description: e-mail address
           type: string
@@ -411,6 +414,27 @@ components:
           type: string
           format: url
           example: 'https://abc'
+        userCharacteristic:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'
+    Any: {}
+    Characteristic:
+      type: object
+      description: Describes a given characteristic of an object or entity through a name/value pair.
+      required:
+        - name
+        - value
+      properties:
+        name:
+          type: string
+          description: Name of the characteristic
+        valueType:
+          type: string
+          description: Data type of the value of the characteristic
+        value:
+          $ref: '#/components/schemas/Any'
+          description: The value of the characteristic
     Error:
       description: 'Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)'
       type: object
